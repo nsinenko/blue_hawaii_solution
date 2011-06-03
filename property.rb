@@ -1,3 +1,5 @@
+require 'bigdecimal'
+
 class Property  
   def initialize(f)
     @name = f['name']    
@@ -42,8 +44,9 @@ class Property
     
     total_rate += @cleaning_fee
     total_rate *= 1.0411416 # add sales tax
-    
-    {:name => @name, :cost => total_rate.round(2) }
+    total_rate = ("%.2f" % total_rate.round(2)) # round to 2 decimal points    
+      
+    {:name => @name, :cost => total_rate }
   end
   
   private
